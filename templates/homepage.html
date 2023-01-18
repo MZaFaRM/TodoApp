@@ -1,0 +1,128 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+  <link rel="stylesheet" href="{% static 'main.css' %}" />
+  <link rel="stylesheet" href="{% static 'homepage.css' %}" />
+  <title>Home Page</title>
+</head>
+<body>
+  <section class="vh-100">
+    <div class="card-body py-4 px-4 px-md-5">
+      <div class="title_div head_div text-center mt-3 mb-4 pb-3 text-primary">
+        <h1>TaskHive</h1>
+      </div>
+      <form
+        class="form row justify-content-center"
+        autocomplete="off"
+        method="post"
+        name="new_task"
+        style="margin-top: 100px; margin-bottom: 50px"
+      >
+        {% csrf_token %}
+        <div class="col-6 h-100 mx-2 control block-cube block-input task_name">
+          <input name="new_task_name" type="text" placeholder="Add new..." />
+          <div class="bg-top">
+            <div class="bg-inner"></div>
+          </div>
+          <div class="bg-right">
+            <div class="bg-inner"></div>
+          </div>
+          <div class="bg">
+            <div class="bg-inner"></div>
+          </div>
+        </div>
+        <div class="col-3 h-100">
+          <div class="control block-cube block-input">
+            <input name="date" type="datetime-local" />
+            <div class="bg-top">
+              <div class="bg-inner"></div>
+            </div>
+            <div class="bg-right">
+              <div class="bg-inner"></div>
+            </div>
+            <div class="bg">
+              <div class="bg-inner"></div>
+            </div>
+          </div>
+        </div>
+        <div class="green col-1 h-100">
+          <button class="btn block-cube block-cube-hover" type="submit">
+            <div class="bg-top">
+              <div class="bg-inner"></div>
+            </div>
+            <div class="bg-right">
+              <div class="bg-inner"></div>
+            </div>
+            <div class="bg">
+              <div class="bg-inner"></div>
+            </div>
+            <div class="text">Submit</div>
+          </button>
+        </div>
+      </form>
+
+      <form class="form green" style="display: flex; justify-content: center; align-items: center;">
+        <a class="btn block-cube block-cube-hover" style="margin: auto; width: 50%" type="submit" href="{% url 'logout' %}">
+          <div class="bg-top">
+             <div class="bg-inner"></div>
+          </div>
+          <div class="bg-right">
+             <div class="bg-inner"></div>
+          </div>
+          <div class="bg">
+             <div class="bg-inner"></div>
+          </div>
+          <div class="text">Log out</div>
+        </a>
+      </form>
+
+      <!-- Completed tasks-->
+
+      <hr class="my-4" />
+
+      <div class="subheading_div text-center mt-3 mb-4 pb-3 text-primary">
+        <h1>Completed tasks</h1>
+      </div>
+      {% for task in tasks %}
+      <!-- if task completed -->
+      {% if task.status %}
+      {% include 'completed.html' with task=task %}
+      {% endif %}
+      {% endfor %}
+
+      <!-- Post Deadline -->
+
+      <hr class="my-4" />
+
+      <div
+        class="subheading_div head_div text-center mt-3 mb-4 pb-3 text-primary"
+      >
+        <h1>Past Deadline</h1>
+      </div>
+
+      {% for task in tasks %}
+      <!-- if task not completed past due date -->
+      {% if task.datetime <= now and not task.status %}
+      {% include 'post_deadline.html' with task=task %}
+      {% endif %}
+      {% endfor %}
+
+      <!-- Upcoming tasks-->
+
+      <hr class="my-4" />
+
+      <div
+        class="subheading_div head_div text-center mt-3 mb-4 pb-3 text-primary"
+      >
+        <h1>Upcoming tasks</h1>
+      </div>
+      {% for task in tasks %}
+      <!-- if task not completed past due date -->
+      {% if task.datetime > now and not task.status %}
+      {% include 'upcoming.html' with task=task %}
+      {% endif %}
+      {% endfor %}
+    </div>
+  </section>
+  {% endblock %}
+</body>
