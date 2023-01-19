@@ -30,15 +30,15 @@ def homepage(request):
     datetime_object = datetime.strptime(now, "%Y-%m-%d %H:%M:%S")
     tz = pytz.timezone("Asia/Kolkata")
     now = tz.localize(datetime_object)
-    
+
     if "new_task_name" in request.POST:
         # adding new task
-        
+
         task_name = request.POST.get("new_task_name")
         due_date = request.POST.get("date")
-        
+
         if task_name:
-            
+
             # form validation
             datetime_object = datetime.strptime(due_date, "%Y-%m-%dT%H:%M")
             tz = pytz.timezone("Asia/Kolkata")
@@ -50,15 +50,8 @@ def homepage(request):
                 datetime=datetime_object,
                 status=0,
             )
-            
+
             task_db.save()
             tasks = Task_data.objects.filter(user_id=user_id).order_by("datetime")
-            
-        else:
-            return render(
-                request,
-                "homepage.html",
-                {"tasks": tasks, "error": "Please provide a name for the task", "now": now}
-            )
-            
+
     return render(request, "homepage.html", {"tasks": tasks, "now": now})
