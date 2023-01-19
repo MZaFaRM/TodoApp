@@ -20,7 +20,7 @@
       >
         {% csrf_token %}
         <div class="col-6 h-100 mx-2 control block-cube block-input task_name">
-          <input name="new_task_name" type="text" placeholder="Add new..." />
+          <input name="new_task_name" type="text" placeholder="Add new..." required />
           <div class="bg-top">
             <div class="bg-inner"></div>
           </div>
@@ -33,7 +33,7 @@
         </div>
         <div class="col-3 h-100">
           <div class="control block-cube block-input">
-            <input name="date" type="datetime-local" />
+            <input name="date" type="datetime-local" required/>
             <div class="bg-top">
               <div class="bg-inner"></div>
             </div>
