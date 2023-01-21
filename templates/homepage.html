@@ -83,7 +83,7 @@
       <div class="subheading_div text-center mt-3 mb-4 pb-3 text-primary">
         <h1>Completed tasks</h1>
       </div>
-      {% for task in tasks %}
+      {% for task in homepage.tasks %}
       <!-- if task completed -->
       {% if task.status %}
       {% include 'completed.html' with task=task %}
@@ -100,7 +100,7 @@
         <h1>Past Deadline</h1>
       </div>
 
-      {% for task in tasks %}
+      {% for task in homepage.tasks %}
       <!-- if task not completed past due date -->
       {% if task.datetime <= now and not task.status %}
       {% include 'post_deadline.html' with task=task %}
@@ -116,7 +116,7 @@
       >
         <h1>Upcoming tasks</h1>
       </div>
-      {% for task in tasks %}
+      {% for task in homepage.tasks %}
       <!-- if task not completed past due date -->
       {% if task.datetime > now and not task.status %}
       {% include 'upcoming.html' with task=task %}
