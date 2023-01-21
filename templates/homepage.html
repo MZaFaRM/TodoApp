@@ -102,7 +102,7 @@
 
       {% for task in homepage.tasks %}
       <!-- if task not completed past due date -->
-      {% if task.datetime <= now and not task.status %}
+      {% if task.datetime <= homepage.now and not task.status %}
       {% include 'post_deadline.html' with task=task %}
       {% endif %}
       {% endfor %}
@@ -118,7 +118,7 @@
       </div>
       {% for task in homepage.tasks %}
       <!-- if task not completed past due date -->
-      {% if task.datetime > now and not task.status %}
+      {% if task.datetime > homepage.now and not task.status %}
       {% include 'upcoming.html' with task=task %}
       {% endif %}
       {% endfor %}
