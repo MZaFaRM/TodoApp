@@ -54,6 +54,6 @@ def homepage(request):
             task_db.save()
             tasks = Task_data.objects.filter(user_id=user_id).order_by("datetime")
             
-            homepage = {"tasks": tasks, "now": now}
+    homepage = {"tasks": tasks, "now": now}
 
     return render(request, "homepage.html", {"homepage": homepage})
