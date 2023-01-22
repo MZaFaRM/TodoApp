@@ -1,7 +1,5 @@
-from django.contrib import admin
-from django.urls import path, include
+from django.urls import path
 from registration import views
-from homepage import views as home
 
 urlpatterns = [
     path("login/", views.loginPage, name='login'),
