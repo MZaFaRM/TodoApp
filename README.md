@@ -41,5 +41,3 @@ python manage.py runserver
 
 ### Note
 This application is not intended to be used in production and serves only as a representation of my learning progress with the Django framework. Feel free to use the code as a reference or starting point for your own projects.
-
-Enjoy!
