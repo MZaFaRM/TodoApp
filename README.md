@@ -18,7 +18,6 @@ git clone https://github.com/MZaFaRM/TodoApp.git
 
 ```
 python -m venv venv
-source venv/bin/activate
 ```
 
 3. Install the required packages
