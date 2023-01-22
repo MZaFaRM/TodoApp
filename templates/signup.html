@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% block content %}
+<title>Sign up</title>
+{% load static %}
+<link rel="stylesheet" href="{% static 'registration.css' %}" />
+</head>
+<body>
+  <form class="form" autocomplete="off" method="post">
+    {% csrf_token %} 
+      <div class="title_div head_div text-center mt-3 mb-4 pb-3 text-primary">
+        <h1>TaskHive</h1>
+      </div>
+      <div class="control">
+         <h3 style="color: white;">Sign up</h3>
+      </div>
+      <div class="control block-cube block-input">
+         <input name="username" type="text" placeholder="Username" required />
+         <div class="bg-top">
+            <div class="bg-inner"></div>
+         </div>
+         <div class="bg-right">
+            <div class="bg-inner"></div>
+         </div>
+         <div class="bg">
+            <div class="bg-inner"></div>
+         </div>
+      </div>
+      <div class="control block-cube block-input">
+         <input name="password" type="password" placeholder="Password" required />
+         <div class="bg-top">
+            <div class="bg-inner"></div>
+         </div>
+         <div class="bg-right">
+            <div class="bg-inner"></div>
+         </div>
+         <div class="bg">
+            <div class="bg-inner"></div>
+         </div>
+      </div>
+      <div class="control block-cube block-input">
+         <input name="re-password" type="password" placeholder="Re-enter Password" required />
+         <div class="bg-top">
+            <div class="bg-inner"></div>
+         </div>
+         <div class="bg-right">
+            <div class="bg-inner"></div>
+         </div>
+         <div class="bg">
+            <div class="bg-inner"></div>
+         </div>
+      </div>
+      <button class="btn block-cube block-cube-hover" type="submit">
+         <div class="bg-top">
+            <div class="bg-inner"></div>
+         </div>
+         <div class="bg-right">
+            <div class="bg-inner"></div>
+         </div>
+         <div class="bg">
+            <div class="bg-inner"></div>
+         </div>
+         <div class="text">Register</div>
+      </button>
+      <div class="footer_div">
+        <a href="{% url 'login' %}">Already a user?</a>
+      </div>
+    </form>
+   {% endblock %}
