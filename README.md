@@ -17,7 +17,7 @@ git clone https://github.com/MZaFaRM/TodoApp.git
 2. Create a virtual environment and activate it
 
 ```
-python3 -m venv venv
+python -m venv venv
 source venv/bin/activate
 ```
 
