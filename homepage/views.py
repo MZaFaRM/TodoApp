@@ -1,6 +1,7 @@
+from django.http import HttpResponse
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
-from .models import Task_data
+from .models import TaskTypes
 from datetime import datetime
 import pytz
 
@@ -8,9 +9,9 @@ import pytz
 # Create your views here.
 @login_required(login_url="login")
 def homepage(request):
-
+    return HttpResponse("asd")
     user_id = request.user.id
-    tasks = Task_data.objects.filter(user_id=user_id).order_by("datetime")
+    tasks = TaskTypes.objects.filter(user_id=user_id).order_by("datetime")
 
     if "task_exist" in request.POST:
         # helps to determine what to do, switch task status or delete task
@@ -18,11 +19,11 @@ def homepage(request):
         element_id = request.POST.get("id")
 
         if quest == "delete_task":
-            Task_data.objects.filter(id=element_id).delete()
+            TaskTypes.objects.filter(id=element_id).delete()
 
         elif quest == "switch_state":
-            task = Task_data.objects.get(id=element_id)
-            Task_data.objects.filter(id=element_id).update(status=(task.status + 1) % 2)
+            task = TaskTypes.objects.get(id=element_id)
+            TaskTypes.objects.filter(id=element_id).update(status=(task.status + 1) % 2)
 
     # converting both (now, db saved time) time into same format for comparison
     now = str(datetime.now())
@@ -43,7 +44,7 @@ def homepage(request):
             datetime_object = datetime.strptime(due_date, "%Y-%m-%dT%H:%M")
             tz = pytz.timezone("Asia/Kolkata")
             datetime_object = tz.localize(datetime_object)
-            task_db = Task_data(
+            task_db = TaskTypes(
                 user_id=user_id,
                 name=task_name,
                 datetime_iso=due_date,
@@ -52,7 +53,7 @@ def homepage(request):
             )
 
             task_db.save()
-            tasks = Task_data.objects.filter(user_id=user_id).order_by("datetime")
+            tasks = TaskTypes.objects.filter(user_id=user_id).order_by("datetime")
             
     homepage = {"tasks": tasks, "now": now}
 

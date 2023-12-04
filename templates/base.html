@@ -22,8 +22,13 @@
 
     {% if error %}
     <div class="alert alert-light alert-warning alert-dismissible fade show" role="alert">
-      <h6>{{ error }}</h6>
-      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        <h6>{{ error }}</h6>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    {% elif success %}
+    <div class="alert alert-light alert-success alert-dismissible fade show" role="alert">
+        <h6>{{ error|default:success }}</h6>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
     {% endif %}
 
